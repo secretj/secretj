@@ -1,6 +1,6 @@
 ### 아직은 개발 공부 노트
 
-<a href="https://www.notion.so/POCU-C-299ff5714f964e0ba67815aecd70a9c5" target="_blank"><img src="https://img.shields.io/badge/NOTION-000000?style=flat-square&logo=Notion&logoColor=white&textalign=center"/></a>
+<a href="https://www.notion.so/secretj" target="_blank"><img src="https://img.shields.io/badge/NOTION-000000?style=flat-square&logo=Notion&logoColor=white&textalign=center"/></a>
 
 [![secretj's github stats](https://github-readme-stats.vercel.app/api/top-langs/?username=secretj&show_icons=true&hide_border=true&title_color=004386&icon_color=004386&layout=compact)](https://github.com/secretj)
 ![secretj's github stats](https://github-readme-stats.vercel.app/api?username=secretj&show_icons=true)
