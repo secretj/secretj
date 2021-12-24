@@ -1,6 +1,6 @@
 ## HI
 
-### 📚 기술 Stack 📚
+### 📚 Stack
 
 <img src="https://img.shields.io/badge/JAVA-007396?style=for-the-badge&logo=java&logoColor=black"> <img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=Spring&logoColor=black"> 
 <img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=for-the-badge&logo=apachetomcat&logo color=white">
