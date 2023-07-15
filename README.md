@@ -1,7 +1,7 @@
 ## HI JIN
-
+<br>
 ### 📓 Study Note
-LINK - <a href="https://secretj.notion.site/c209618d65334d2c898303203d9aac0c" target="_blank"><img src="https://img.shields.io/badge/NOTION-000000?style=flat-square&logo=Notion&logoColor=white&"/></a>
+LINK - ['꽉 채울거야! 지식 창고'](https://www.notion.so/secretj/c209618d65334d2c898303203d9aac0c?pvs=4)
 
 
 
