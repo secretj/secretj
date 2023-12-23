@@ -1,1 +1,1 @@
-![header](https://capsule-render.vercel.app/api?type=Waving&text =HI,JIN)
+![header](https://capsule-render.vercel.app/api?type=Waving&text=JIN)
