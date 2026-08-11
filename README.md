@@ -62,9 +62,11 @@
 
 ## 주로 쓰는 것
 
-**서버** Java · Spring Boot · JPA · MariaDB / MySQL · Redis · Flyway
-**앱·프론트** Kotlin · Jetpack Compose · React · TypeScript · Vite · PWA
-**운영** Docker Compose · GitHub Actions · nginx · Cloudflare · Python
+| | |
+|---|---|
+| **서버** | Java · Spring Boot · JPA · MariaDB / MySQL · Redis · Flyway |
+| **앱·프론트** | Kotlin · Jetpack Compose · React · TypeScript · Vite · PWA |
+| **운영** | Docker Compose · GitHub Actions · nginx · Cloudflare · Python |
 
 <br>
 
