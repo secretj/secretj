@@ -1,6 +1,6 @@
 ### 박진형 · secretj
 
-백엔드를 주로 다루지만, 서비스 하나를 서버부터 화면·배포·운영까지 혼자 굴리는 쪽을 좋아한다.
+백엔드 개발자
 평일에는 그룹웨어 메일 서비스 백엔드를, 그 밖의 시간에는 아래 두 개를 만들고 있다.
 
 <br>
@@ -64,8 +64,7 @@
 
 | | |
 |---|---|
-| **서버** | Java · Spring Boot · JPA · MariaDB / MySQL · Redis · Flyway |
-| **앱·프론트** | Kotlin · Jetpack Compose · React · TypeScript · Vite · PWA |
+| **서버** | PHP · Java · Spring Boot · JPA · MariaDB / MySQL · Redis · Flyway |
 | **운영** | Docker Compose · GitHub Actions · nginx · Cloudflare · Python |
 
 <br>
