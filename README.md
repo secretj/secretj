@@ -1,11 +1,55 @@
+<table>
+<tr>
+<td valign="top" width="50%">
+
 ### 박진형 · secretj
 
 백엔드 개발자
-평일에는 그룹웨어 메일 서비스 백엔드를, 그 밖의 시간에는 아래 두 개를 만들고 있다.
+평일에는 그룹웨어 메일 서비스 서버를 다루고,
+그 밖의 시간에는 직접 만든 앱 두 개를 운영한다.
+
+혼자 만드는 쪽이라 서버부터 화면, 배포까지 다 잡는다.
+고친 건 테스트로 남기고, 애매하게 고른 건 이유를 적어 둔다.
+
+Seoul · [@mailplug-inc](https://github.com/mailplug-inc)
+
+</td>
+<td valign="top" width="50%">
+
+<img src="assets/stats.svg" alt="지난 1년 컨트리뷰션 1,797건, 유지 중인 저장소 11개, 언어 비중 Java 49% TypeScript 29% Kotlin 9%">
+
+</td>
+</tr>
+</table>
+
+<table>
+<tr><td><b>서버</b></td><td>
+<img src="https://img.shields.io/badge/Java-24292f?style=flat-square&logo=openjdk&logoColor=white" alt="Java">
+<img src="https://img.shields.io/badge/Spring%20Boot-24292f?style=flat-square&logo=springboot&logoColor=white" alt="Spring Boot">
+<img src="https://img.shields.io/badge/PHP-24292f?style=flat-square&logo=php&logoColor=white" alt="PHP">
+<img src="https://img.shields.io/badge/MariaDB-24292f?style=flat-square&logo=mariadb&logoColor=white" alt="MariaDB">
+<img src="https://img.shields.io/badge/MySQL-24292f?style=flat-square&logo=mysql&logoColor=white" alt="MySQL">
+<img src="https://img.shields.io/badge/Redis-24292f?style=flat-square&logo=redis&logoColor=white" alt="Redis">
+</td></tr>
+<tr><td><b>앱 · 프론트</b></td><td>
+<img src="https://img.shields.io/badge/Kotlin-24292f?style=flat-square&logo=kotlin&logoColor=white" alt="Kotlin">
+<img src="https://img.shields.io/badge/Jetpack%20Compose-24292f?style=flat-square&logo=jetpackcompose&logoColor=white" alt="Jetpack Compose">
+<img src="https://img.shields.io/badge/React-24292f?style=flat-square&logo=react&logoColor=white" alt="React">
+<img src="https://img.shields.io/badge/TypeScript-24292f?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript">
+<img src="https://img.shields.io/badge/Vite-24292f?style=flat-square&logo=vite&logoColor=white" alt="Vite">
+</td></tr>
+<tr><td><b>운영</b></td><td>
+<img src="https://img.shields.io/badge/Docker-24292f?style=flat-square&logo=docker&logoColor=white" alt="Docker">
+<img src="https://img.shields.io/badge/GitHub%20Actions-24292f?style=flat-square&logo=githubactions&logoColor=white" alt="GitHub Actions">
+<img src="https://img.shields.io/badge/nginx-24292f?style=flat-square&logo=nginx&logoColor=white" alt="nginx">
+<img src="https://img.shields.io/badge/Cloudflare-24292f?style=flat-square&logo=cloudflare&logoColor=white" alt="Cloudflare">
+<img src="https://img.shields.io/badge/Python-24292f?style=flat-square&logo=python&logoColor=white" alt="Python">
+</td></tr>
+</table>
 
 <br>
 
-## 지금 만드는 것
+## 만들고 있는 것
 
 <table>
 <tr>
@@ -23,11 +67,7 @@
 </tr>
 </table>
 
-<p align="center">
-  <img src="assets/checky-memory.png" width="30%" alt="소식">
-  <img src="assets/checky-checklist.png" width="30%" alt="체크리스트">
-  <img src="assets/checky-household.png" width="30%" alt="살림 가계부">
-</p>
+<img src="assets/checky-guide.gif" width="100%" alt="체키 기능 가이드 — 소식, 체크리스트, 가계부, 달력 탭을 넘겨 보는 화면">
 
 <table>
 <tr>
@@ -56,12 +96,3 @@
 | **[Lien](https://github.com/secretj/Lien)** | JWT 인증 붙여 본 프로젝트 · `Spring Boot` `Spring Security` `Redis` `MySQL` |
 | **[Discord-pubg-bot](https://github.com/secretj/Discord-pubg-bot)** | 배그 랭크 보고 디스코드 역할 자동으로 바꿔 주는 봇 · `Kotlin` |
 | **[secretj-claude-config](https://github.com/secretj/secretj-claude-config)** | 내 Claude Code 설정 (skills / hooks) |
-
-<br>
-
-## 주로 쓰는 것
-
-| | |
-|---|---|
-| **서버** | PHP · Java · Spring Boot · JPA · MariaDB / MySQL · Redis · Flyway |
-| **운영** | Docker Compose · GitHub Actions · nginx · Cloudflare · Python |

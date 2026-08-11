@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="184" viewBox="0 0 480 184" role="img" aria-label="GitHub 활동 요약">
+<style>
+  .num { font: 700 30px -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; fill: #4493f8; }
+  .cap { font: 400 12px -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; fill: #8b949e; }
+  .hdr { font: 600 11px -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; fill: #8b949e; letter-spacing: .06em; }
+  .lg  { font: 400 11px -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; fill: #8b949e; }
+</style>
+<rect x="0.5" y="0.5" width="479" height="183" rx="10" fill="none" stroke="#8b949e" stroke-opacity=".28"/>
+<text x="22" y="46" class="num">1,797</text>
+<text x="22" y="66" class="cap">지난 1년 컨트리뷰션</text>
+<text x="250" y="46" class="num">11</text>
+<text x="250" y="66" class="cap">유지 중인 저장소 · 57개는 아카이브</text>
+<line x1="22" y1="88" x2="458" y2="88" stroke="#8b949e" stroke-opacity=".22"/>
+<text x="22" y="112" class="hdr">언어 비중 · 유지 중인 저장소 기준</text>
+<g clip-path="inset(0 round 4.5)"><rect x="22.0" y="126" width="214.7" height="9" fill="#b07219"/><rect x="236.7" y="126" width="126.2" height="9" fill="#3178c6"/><rect x="362.9" y="126" width="39.3" height="9" fill="#A97BFF"/><rect x="402.2" y="126" width="32.7" height="9" fill="#663399"/><rect x="434.9" y="126" width="23.1" height="9" fill="#8b949e"/></g>
+<circle cx="26" cy="160" r="4" fill="#b07219"/><text x="36" y="164" class="lg">Java 49%</text><circle cx="108" cy="160" r="4" fill="#3178c6"/><text x="118" y="164" class="lg">TypeScript 29%</text><circle cx="234" cy="160" r="4" fill="#A97BFF"/><text x="244" y="164" class="lg">Kotlin 9%</text><circle cx="330" cy="160" r="4" fill="#663399"/><text x="340" y="164" class="lg">CSS 8%</text><circle cx="404" cy="160" r="4" fill="#8b949e"/><text x="414" y="164" class="lg">기타 5%</text>
+</svg>
