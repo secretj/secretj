@@ -52,9 +52,6 @@
 
 **체키** · [hichecky.com](https://hichecky.com) · [기능 가이드](https://hichecky.com/guide/checky-guide.html)
 
-가족이나 친구끼리 쓰는 그룹 앱. 소식 남기고, 체크리스트 같이 쓰고, 가계부와 집안일을 나눠 관리한다.
-카드 결제 알림을 읽어서 가계부에 넣어주고, 기념일은 1주 전에 알려준다.
-
 `Java 21` `Spring Boot 3.4` `MariaDB` `Flyway` `React 18` `TypeScript` `Vite` `Docker Compose` `Cloudflare Tunnel`
 
 </td>
@@ -70,8 +67,7 @@
 
 **품앗이** · Google Play 비공개 테스트
 
-축의금, 부의금 기록하는 안드로이드 앱. 서버에 올리지 않고 폰에만 저장하고, DB는 암호화해 둔다.
-연락처에서 이름 가져오기, 결제 알림으로 금액 채우기, 기프티콘 사진 인식이 들어 있다.
+축의금, 부의금 기록하는 안드로이드 앱. 서버에 올리지 않고 폰에만 저장
 
 `Kotlin` `Jetpack Compose` `Room` `SQLCipher` `Android Keystore` `Play Billing`
 
