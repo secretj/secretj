@@ -90,7 +90,7 @@ YEARS = [
 def build_timeline(ic):
     """해마다 무엇이 쌓였는지 위에 적고, 쌓인 것을 아래에 모아 둔다."""
     W2, H2 = 880, 246
-    DUR = 11
+    DUR = 6
     cols = [56 + i * 122 for i in range(7)]
     axis_y, p, kf = 74, [], []
 
@@ -111,11 +111,11 @@ def build_timeline(ic):
         p.append(f'<g class="y{i}">' + "".join(g) + '</g>')
 
     # 해를 지나가는 점
-    p.append(f'<circle r="4" fill="{ACC}"><animateMotion dur="{DUR}s" repeatCount="indefinite"'
+    p.append(f'<circle r="4" fill="{ACC}"><animateMotion dur="{DUR}s" fill="freeze"'
              f' calcMode="linear" path="M{cols[0]},{axis_y} H{cols[-1]}"'
-             f' keyTimes="0;0.04;0.79;1" keyPoints="0;0;1;1"/>'
-             f'<animate attributeName="opacity" dur="{DUR}s" repeatCount="indefinite"'
-             f' values="0;1;1;0;0" keyTimes="0;0.04;0.79;0.84;1"/></circle>')
+             f' keyTimes="0;0.05;0.86;1" keyPoints="0;0;1;1"/>'
+             f'<animate attributeName="opacity" dur="{DUR}s" fill="freeze"'
+             f' values="0;1;1;0;0" keyTimes="0;0.05;0.86;0.93;1"/></circle>')
 
     # ── 아래: 그때까지 쌓인 것 ────────────────────────────────────────────
     stack_y = 212
@@ -140,8 +140,7 @@ def build_timeline(ic):
     for i in range(len(YEARS)):
         begin = 0.04 + i * 0.112
         kf.append(f"@keyframes y{i}{{0%,{begin * 100:.1f}%{{opacity:0;transform:translateY(7px)}}"
-                  f"{(begin + 0.03) * 100:.1f}%,92%{{opacity:1;transform:translateY(0)}}"
-                  f"97%,100%{{opacity:0;transform:translateY(7px)}}}}")
+                  f"{(begin + 0.035) * 100:.1f}%,100%{{opacity:1;transform:translateY(0)}}}}")
 
     css = f"""
   text {{ font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD Gothic Neo","Malgun Gothic",sans-serif; }}
@@ -155,8 +154,8 @@ def build_timeline(ic):
   .chip {{ fill: none; stroke: {BASE}; stroke-opacity: .42; stroke-width: 1.1; }}
   .chip-t {{ font-size: 10.5px; font-weight: 600; fill: {BASE}; fill-opacity: .88; }}
   .mark {{ font-size: 26px; font-weight: 700; fill: {BASE}; fill-opacity: .45; }}
-  g[class^="y"] {{ animation-duration: {DUR}s; animation-iteration-count: infinite;
-    animation-timing-function: cubic-bezier(.2,.8,.2,1); }}
+  g[class^="y"] {{ animation-duration: {DUR}s; animation-iteration-count: 1;
+    animation-fill-mode: both; animation-timing-function: cubic-bezier(.2,.8,.2,1); }}
 """
     for i in range(len(YEARS)):
         css += f"  .y{i} {{ animation-name: y{i}; }}\n"

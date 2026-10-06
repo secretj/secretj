@@ -11,8 +11,8 @@
   .chip { fill: none; stroke: #8b949e; stroke-opacity: .42; stroke-width: 1.1; }
   .chip-t { font-size: 10.5px; font-weight: 600; fill: #8b949e; fill-opacity: .88; }
   .mark { font-size: 26px; font-weight: 700; fill: #8b949e; fill-opacity: .45; }
-  g[class^="y"] { animation-duration: 11s; animation-iteration-count: infinite;
-    animation-timing-function: cubic-bezier(.2,.8,.2,1); }
+  g[class^="y"] { animation-duration: 6s; animation-iteration-count: 1;
+    animation-fill-mode: both; animation-timing-function: cubic-bezier(.2,.8,.2,1); }
   .y0 { animation-name: y0; }
   .y1 { animation-name: y1; }
   .y2 { animation-name: y2; }
@@ -20,13 +20,13 @@
   .y4 { animation-name: y4; }
   .y5 { animation-name: y5; }
   .y6 { animation-name: y6; }
-  @keyframes y0{0%,4.0%{opacity:0;transform:translateY(7px)}7.0%,92%{opacity:1;transform:translateY(0)}97%,100%{opacity:0;transform:translateY(7px)}}
-  @keyframes y1{0%,15.2%{opacity:0;transform:translateY(7px)}18.2%,92%{opacity:1;transform:translateY(0)}97%,100%{opacity:0;transform:translateY(7px)}}
-  @keyframes y2{0%,26.4%{opacity:0;transform:translateY(7px)}29.4%,92%{opacity:1;transform:translateY(0)}97%,100%{opacity:0;transform:translateY(7px)}}
-  @keyframes y3{0%,37.6%{opacity:0;transform:translateY(7px)}40.6%,92%{opacity:1;transform:translateY(0)}97%,100%{opacity:0;transform:translateY(7px)}}
-  @keyframes y4{0%,48.8%{opacity:0;transform:translateY(7px)}51.8%,92%{opacity:1;transform:translateY(0)}97%,100%{opacity:0;transform:translateY(7px)}}
-  @keyframes y5{0%,60.0%{opacity:0;transform:translateY(7px)}63.0%,92%{opacity:1;transform:translateY(0)}97%,100%{opacity:0;transform:translateY(7px)}}
-  @keyframes y6{0%,71.2%{opacity:0;transform:translateY(7px)}74.2%,92%{opacity:1;transform:translateY(0)}97%,100%{opacity:0;transform:translateY(7px)}}
+  @keyframes y0{0%,4.0%{opacity:0;transform:translateY(7px)}7.5%,100%{opacity:1;transform:translateY(0)}}
+  @keyframes y1{0%,15.2%{opacity:0;transform:translateY(7px)}18.7%,100%{opacity:1;transform:translateY(0)}}
+  @keyframes y2{0%,26.4%{opacity:0;transform:translateY(7px)}29.9%,100%{opacity:1;transform:translateY(0)}}
+  @keyframes y3{0%,37.6%{opacity:0;transform:translateY(7px)}41.1%,100%{opacity:1;transform:translateY(0)}}
+  @keyframes y4{0%,48.8%{opacity:0;transform:translateY(7px)}52.3%,100%{opacity:1;transform:translateY(0)}}
+  @keyframes y5{0%,60.0%{opacity:0;transform:translateY(7px)}63.5%,100%{opacity:1;transform:translateY(0)}}
+  @keyframes y6{0%,71.2%{opacity:0;transform:translateY(7px)}74.7%,100%{opacity:1;transform:translateY(0)}}
 </style>
 <path class="axis" d="M34,74 H846"/>
 <g class="y0"><text class="yr" x="56" y="52" text-anchor="middle">2021</text><circle class="node-y" cx="56" cy="74" r="5.5"/><text class="ln" x="56" y="100" text-anchor="middle">자바로 시작</text><text class="ln2" x="56" y="115" text-anchor="middle">부트캠프에서 웹 전반</text></g>
@@ -36,7 +36,7 @@
 <g class="y4"><text class="yr" x="544" y="52" text-anchor="middle">2025</text><circle class="node-y" cx="544" cy="74" r="5.5"/><text class="ln" x="544" y="100" text-anchor="middle">코딩 표준 · 에러 통합</text><text class="ln2" x="544" y="115" text-anchor="middle">2단계 인증, 속도 개선</text><text class="ln2" x="544" y="130" text-anchor="middle">Cursor 를 쓰기 시작</text></g>
 <g class="y5"><text class="yr" x="666" y="52" text-anchor="middle">2026</text><circle class="node-y" cx="666" cy="74" r="5.5"/><text class="ln" x="666" y="100" text-anchor="middle">Claude Code 로</text><text class="ln2" x="666" y="115" text-anchor="middle">혼자 만들어 운영</text></g>
 <g class="y6"><text class="yr" x="788" y="52" text-anchor="middle">?</text><circle class="node-q" cx="788" cy="74" r="7"/><text class="ln" x="788" y="100" text-anchor="middle">다음엔</text><text class="ln2" x="788" y="115" text-anchor="middle">무엇을 쌓게 될까?</text><text class="mark" x="788" y="146" text-anchor="middle">?</text></g>
-<circle r="4" fill="#4493f8"><animateMotion dur="11s" repeatCount="indefinite" calcMode="linear" path="M56,74 H788" keyTimes="0;0.04;0.79;1" keyPoints="0;0;1;1"/><animate attributeName="opacity" dur="11s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.04;0.79;0.84;1"/></circle>
+<circle r="4" fill="#4493f8"><animateMotion dur="6s" fill="freeze" calcMode="linear" path="M56,74 H788" keyTimes="0;0.05;0.86;1" keyPoints="0;0;1;1"/><animate attributeName="opacity" dur="6s" fill="freeze" values="0;1;1;0;0" keyTimes="0;0.05;0.86;0.93;1"/></circle>
 <path class="axis" d="M34,182 H846" opacity=".55"/>
 <g class="y0"><g class="lg" transform="translate(44.0,201.5) scale(0.8750)"><path d="M11.915 0 11.7.215C9.515 2.4 7.47 6.39 6.046 10.483c-1.064 1.024-3.633 2.81-3.711 3.551-.093.87 1.746 2.611 1.55 3.235-.198.625-1.304 1.408-1.014 1.939.1.188.823.011 1.277-.491a13.389 13.389 0 0 0-.017 2.14c.076.906.27 1.668.643 2.232.372.563.956.911 1.667.911.397 0 .727-.114 1.024-.264.298-.149.571-.33.91-.5.68-.34 1.634-.666 3.53-.604 1.903.062 2.872.39 3.559.704.687.314 1.15.664 1.925.664.767 0 1.395-.336 1.807-.9.412-.563.631-1.33.72-2.24.06-.623.055-1.32 0-2.066.454.45 1.117.604 1.213.424.29-.53-.816-1.314-1.013-1.937-.198-.624 1.642-2.366 1.549-3.236-.08-.748-2.707-2.568-3.748-3.586C16.428 6.374 14.308 2.394 12.13.215zm.175 6.038a2.95 2.95 0 0 1 2.943 2.942 2.95 2.95 0 0 1-2.943 2.943A2.95 2.95 0 0 1 9.148 8.98a2.95 2.95 0 0 1 2.942-2.942zM8.685 7.983a3.515 3.515 0 0 0-.145.997c0 1.951 1.6 3.55 3.55 3.55 1.95 0 3.55-1.598 3.55-3.55 0-.329-.046-.648-.132-.951.334.095.64.208.915.336a42.699 42.699 0 0 1 2.042 5.829c.678 2.545 1.01 4.92.846 6.607-.082.844-.29 1.51-.606 1.94-.315.431-.713.651-1.315.651-.593 0-.932-.27-1.673-.61-.741-.338-1.825-.694-3.792-.758-1.974-.064-3.073.293-3.821.669-.375.188-.659.373-.911.5s-.466.2-.752.2c-.53 0-.876-.209-1.16-.64-.285-.43-.474-1.101-.545-1.948-.141-1.693.176-4.069.823-6.614a43.155 43.155 0 0 1 1.934-5.783c.348-.167.749-.31 1.192-.425zm-3.382 4.362a.216.216 0 0 1 .13.031c-.166.56-.323 1.116-.463 1.665a33.849 33.849 0 0 0-.547 2.555 3.9 3.9 0 0 0-.2-.39c-.58-1.012-.914-1.642-1.16-2.08.315-.24 1.679-1.755 2.24-1.781zm13.394.01c.562.027 1.926 1.543 2.24 1.783-.246.438-.58 1.068-1.16 2.08a4.428 4.428 0 0 0-.163.309 32.354 32.354 0 0 0-.562-2.49 40.579 40.579 0 0 0-.482-1.652.216.216 0 0 1 .127-.03z"/></g></g>
 <g class="y0"><g class="lg" transform="translate(92.1,201.5) scale(0.8750)"><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/></g></g>
