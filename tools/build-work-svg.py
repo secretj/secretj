@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""assets/work.svg 를 만든다.
+"""README 에 쓰는 움직이는 그림을 만든다.
 
 글자 없이 도형과 공식 로고만으로 하는 일을 보여 주는 애니메이션 SVG 를 생성한다.
 로고 path 는 simple-icons 에서 내려받아 캐시한 뒤 단색으로 다시 칠한다.
@@ -29,6 +29,7 @@ ICONS = [
     "openjdk", "spring", "php", "postgresql", "mariadb", "redis",
     "elasticsearch", "react", "typescript", "vite", "kotlin",
     "jetpackcompose", "githubactions", "cloudflare", "vercel", "python",
+    "html5", "javascript", "dotnet", "codeigniter", "anthropic",
 ]
 
 
@@ -165,6 +166,119 @@ def ring_path(cx, cy, r):
 def on_ring(cx, cy, r, deg):
     a = math.radians(deg)
     return cx + r * math.cos(a), cy + r * math.sin(a)
+
+
+
+def chip(cx, cy, label, cls="chip"):
+    """로고가 없는 것은 글자 칩으로 둔다."""
+    w = len(label) * 7.4 + 16
+    return (f'<g><rect class="{cls}" x="{cx - w / 2:.1f}" y="{cy - 9}" width="{w:.1f}"'
+            f' height="18" rx="9"/>'
+            f'<text class="chip-t" x="{cx}" y="{cy + 4}" text-anchor="middle">{label}</text></g>')
+
+
+# 해마다 무엇이 쌓였는지. 로고 이름이거나 ("칩", 글자) 이다.
+YEARS = [
+    ("2021", ["자바로 시작", "부트캠프에서 웹 전반"],
+     ["openjdk", "html5", "javascript", "spring"]),
+    ("2022", ["첫 회사 입사", "C# 과 Java"],
+     [("칩", "C#"), "dotnet", "openjdk"]),
+    ("2023", ["두 번째 회사 · PHP", "CI3 → CI4 전환", "DDD · Queue"],
+     ["php", "codeigniter", "redis", "elasticsearch"]),
+    ("2024", ["가장 많이 쓴 해"],
+     [("수", "1,796")]),
+    ("2025", ["AI 를 쓰기 시작", "Cursor"],
+     [("칩", "Cursor")]),
+    ("2026", ["Claude Code 로", "혼자 만들어 운영"],
+     ["anthropic", "python", "kotlin", "react", "typescript"]),
+    ("?", ["다음엔", "무엇을 쌓게 될까?"], []),
+]
+
+
+def build_timeline(ic):
+    """해마다 무엇이 쌓였는지 왼쪽에서 오른쪽으로 보여 준다."""
+    W2, H2 = 880, 244
+    DUR = 11
+    cols = [56 + i * 122 for i in range(7)]
+    axis_y, p = 74, []
+    kf = []
+
+    p.append(f'<path class="axis" d="M34,{axis_y} H846"/>')
+
+    for i, (year, lines, items) in enumerate(YEARS):
+        cx = cols[i]
+        last = i == len(YEARS) - 1
+        g = [f'<text class="yr" x="{cx}" y="52" text-anchor="middle">{year}</text>']
+        g.append(f'<circle class="{"node-q" if last else "node-y"}"'
+                 f' cx="{cx}" cy="{axis_y}" r="{7 if last else 5.5}"/>')
+        for j, line in enumerate(lines):
+            g.append(f'<text class="{"ln" if j == 0 else "ln2"}" x="{cx}"'
+                     f' y="{100 + j * 15}" text-anchor="middle">{line}</text>')
+
+        # 한 줄에 셋까지 두고, 줄마다 가운데로 맞춘다
+        rows3 = [items[k:k + 3] for k in range(0, len(items), 3)]
+        for r, row in enumerate(rows3):
+            widths = [len(it[1]) * 7.4 + 16 if isinstance(it, tuple) and it[0] == "칩"
+                      else 30 if isinstance(it, tuple) else 21 for it in row]
+            gap = 7
+            total = sum(widths) + gap * (len(row) - 1)
+            ix = cx - total / 2
+            iy = 160 + r * 26
+            for it, wd in zip(row, widths):
+                mid = ix + wd / 2
+                if isinstance(it, tuple) and it[0] == "칩":
+                    g.append(chip(mid, iy, it[1]))
+                elif isinstance(it, tuple):
+                    g.append(f'<text class="big" x="{cx}" y="{iy + 6}"'
+                             f' text-anchor="middle">{it[1]}</text>')
+                else:
+                    g.append(logo(ic, it, mid, iy, 19))
+                ix += wd + gap
+        if last:
+            g.append(f'<text class="mark" x="{cx}" y="172" text-anchor="middle">?</text>')
+
+        begin = 0.04 + i * 0.112
+        p.append(f'<g class="y{i}">' + "".join(g) + '</g>')
+        kf.append(f"@keyframes y{i}{{0%,{begin * 100:.1f}%{{opacity:0;transform:translateY(7px)}}"
+                  f"{(begin + 0.03) * 100:.1f}%,92%{{opacity:1;transform:translateY(0)}}"
+                  f"97%,100%{{opacity:0;transform:translateY(7px)}}}}")
+
+    # 해를 지나가는 점
+    p.append(f'<circle r="4" fill="{ACC}"><animateMotion dur="{DUR}s" repeatCount="indefinite"'
+             f' calcMode="linear" path="M{cols[0]},{axis_y} H{cols[-1]}"'
+             f' keyTimes="0;0.04;0.79;1" keyPoints="0;0;1;1"/>'
+             f'<animate attributeName="opacity" dur="{DUR}s" repeatCount="indefinite"'
+             f' values="0;1;1;0;0" keyTimes="0;0.04;0.79;0.84;1"/></circle>'
+             )
+
+    css = f"""
+  text {{ font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD Gothic Neo","Malgun Gothic",sans-serif; }}
+  .axis {{ fill: none; stroke: {BASE}; stroke-opacity: .2; stroke-width: 1.2; }}
+  .yr {{ font-size: 14px; font-weight: 700; fill: {BASE}; fill-opacity: 1; }}
+  .ln {{ font-size: 11.5px; font-weight: 600; fill: {BASE}; fill-opacity: .92; }}
+  .ln2 {{ font-size: 10.5px; font-weight: 400; fill: {BASE}; fill-opacity: .62; }}
+  .node-y {{ fill: {ACC}; fill-opacity: .9; }}
+  .node-q {{ fill: none; stroke: {BASE}; stroke-opacity: .5; stroke-width: 1.4; stroke-dasharray: 3 3; }}
+  .lg path {{ fill: {BASE}; fill-opacity: .82; }}
+  .chip {{ fill: none; stroke: {BASE}; stroke-opacity: .42; stroke-width: 1.1; }}
+  .chip-t {{ font-size: 10.5px; font-weight: 600; fill: {BASE}; fill-opacity: .88; }}
+  .big {{ font-size: 19px; font-weight: 700; fill: {ACC}; fill-opacity: .85; }}
+  .mark {{ font-size: 30px; font-weight: 700; fill: {BASE}; fill-opacity: .45; }}
+  g[class^="y"] {{ animation-duration: {DUR}s; animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(.2,.8,.2,1); }}
+"""
+    for i in range(len(YEARS)):
+        css += f"  .y{i} {{ animation-name: y{i}; }}\n"
+
+    alt = ("2021 년 자바로 시작해 부트캠프에서 웹 전반을 익히고, 2022 년 첫 회사에서 C# 과 자바를, "
+           "2023 년 두 번째 회사에서 PHP 와 코드이그나이터, 레디스, 엘라스틱서치를 쓰고, "
+           "2024 년에 가장 많이 작업했고, 2025 년 커서, 2026 년 클로드 코드를 쓰며 "
+           "기술이 해마다 쌓여 온 연표. 마지막 칸은 다음엔 무엇을 쌓게 될까라는 물음")
+
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W2}" height="{H2}" '
+            f'viewBox="0 0 {W2} {H2}" role="img" aria-label="{alt}">\n'
+            f'<style>{css}  ' + "\n  ".join(kf) + '\n</style>\n'
+            + "\n".join(p) + "\n</svg>\n")
 
 
 # ── 본문 ───────────────────────────────────────────────────────────────────
@@ -441,10 +555,14 @@ def build(ic):
 def main():
     here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     ap = argparse.ArgumentParser()
-    ap.add_argument("out", nargs="?", default=os.path.join(here, "assets", "work.svg"))
+    ap.add_argument("out", nargs="?")
+    ap.add_argument("--scene", choices=["work", "timeline"], default="timeline")
     ap.add_argument("--icon-dir", default=os.path.join(here, "tools", "icons"))
     a = ap.parse_args()
-    svg = build(load_icons(a.icon_dir))
+    out = a.out or os.path.join(here, "assets", a.scene + ".svg")
+    a.out = out
+    ic = load_icons(a.icon_dir)
+    svg = build_timeline(ic) if a.scene == "timeline" else build(ic)
     with open(a.out, "w") as f:
         f.write(svg)
     print(f"{a.out} {len(svg)} bytes")
