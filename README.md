@@ -27,7 +27,7 @@
 </tr>
 </table>
 
-## 혼자 만든 것
+## 현재 운영 중인 개인 프로젝트
 
 <table>
 <tr>
@@ -59,32 +59,12 @@
 <sub><a href="https://trip.hichecky.com">trip.hichecky.com</a></sub>
 </td>
 <td width="50%" valign="top">
-<a href="https://github.com/secretj/ot-job"><b>ot-job</b></a><br>
-<sub>작업치료 채용 공고를 모아 카카오톡으로 알리는 웹</sub><br><br>
-<img src="https://img.shields.io/badge/Python-24292f?style=flat-square&logo=python&logoColor=white" alt="Python">
-<img src="https://img.shields.io/badge/Flask-24292f?style=flat-square&logo=flask&logoColor=white" alt="Flask">
-<img src="https://img.shields.io/badge/Vercel-24292f?style=flat-square&logo=vercel&logoColor=white" alt="Vercel">
-<img src="https://img.shields.io/badge/GitHub%20Actions-24292f?style=flat-square&logo=githubactions&logoColor=white" alt="GitHub Actions"><br>
-<sub><a href="https://github.com/secretj/ot-job">저장소</a></sub>
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top">
 <a href="https://github.com/secretj/secretj-claude-config"><b>secretj-claude-config</b></a><br>
 <sub>Claude Code 설정 — 에이전트, 커맨드, 스킬, 훅, MCP 템플릿</sub><br><br>
 <img src="https://img.shields.io/badge/Claude%20Code-24292f?style=flat-square&logo=anthropic&logoColor=white" alt="Claude Code">
 <img src="https://img.shields.io/badge/MCP-24292f?style=flat-square&logo=modelcontextprotocol&logoColor=white" alt="MCP">
 <img src="https://img.shields.io/badge/Shell-24292f?style=flat-square&logo=gnubash&logoColor=white" alt="Shell"><br>
 <sub><a href="https://github.com/secretj/secretj-claude-config">저장소</a></sub>
-</td>
-<td width="50%" valign="top">
-<a href="https://github.com/secretj/Lien"><b>Lien</b></a><br>
-<sub>JWT 인증 서버</sub><br><br>
-<img src="https://img.shields.io/badge/Spring%20Boot-24292f?style=flat-square&logo=springboot&logoColor=white" alt="Spring Boot">
-<img src="https://img.shields.io/badge/Spring%20Security-24292f?style=flat-square&logo=springsecurity&logoColor=white" alt="Spring Security">
-<img src="https://img.shields.io/badge/Redis-24292f?style=flat-square&logo=redis&logoColor=white" alt="Redis">
-<img src="https://img.shields.io/badge/MySQL-24292f?style=flat-square&logo=mysql&logoColor=white" alt="MySQL"><br>
-<sub><a href="https://github.com/secretj/Lien">저장소</a></sub>
 </td>
 </tr>
 </table>
