@@ -22,15 +22,13 @@ BASE = "#8b949e"
 ACC = "#4493f8"
 OK = "#3fb950"
 
-W, H = 880, 584
+W, H = 880, 566
 CDN = "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/{}.svg"
 
 ICONS = [
     "openjdk", "spring", "php", "postgresql", "mariadb", "redis",
-    "elasticsearch", "react", "typescript", "astro", "vite", "kotlin",
-    "jetpackcompose", "git", "githubactions", "docker", "nginx",
-    "cloudflare", "vercel", "python", "anthropic", "obsidian",
-    "jirasoftware", "intellijidea",
+    "elasticsearch", "react", "typescript", "vite", "kotlin",
+    "jetpackcompose", "githubactions", "cloudflare", "vercel", "python",
 ]
 
 
@@ -174,8 +172,8 @@ def build(ic):
 
     # 클라이언트 — 브라우저와 휴대폰, 각자 쓰는 것 로고를 안에 넣는다
     p.append(browser(40, 40, 118, 76))
-    for i, n in enumerate(["react", "typescript", "astro", "vite"]):
-        p.append(logo(ic, n, 69 + i * 20, 98, 13))
+    for i, n in enumerate(["react", "typescript", "vite"]):
+        p.append(logo(ic, n, 79 + i * 20, 98, 14))
     p.append(phone(76, 128, 46, 80))
     for i, n in enumerate(["kotlin", "jetpackcompose"]):
         p.append(logo(ic, n, 99, 170 + i * 20, 14))
@@ -273,80 +271,97 @@ def build(ic):
     p.append(tick(760, 238, 1.25, "tick big",
                   dash_draw(34, D2, 0.80, 0.88)))
 
-    p.append('<path class="rule" d="M40,392 H840"/>')
+    p.append('<path class="rule" d="M40,398 H840"/>')
 
-    # ============ 3. 일하는 순서와 배포 ============
+    # ============ 3. 혼자 만들어 운영 중인 것들 ============
     D3 = 12
-    CX, CY, R = 212, 486, 86
-    p.append(f'<path class="ring" d="{ring_path(CX, CY, R)}"/>')
+    CY3 = 478
+    p.append(brackets(60, CY3, "box"))                  # 코드를 쓴다
+    p.append(f'<path class="wire" d="M76,{CY3} H132"/>')
+    p.append(f'<circle class="pad" cx="152" cy="{CY3}" r="18"/>')
+    p.append(logo(ic, "githubactions", 152, CY3, 22))   # 빌드해서 내보낸다
+    p.append(packet(f"M76,{CY3} H132", 0.02, 0.1, D3, 3))
 
-    # 가운데 — 찾아보는 일을 여러 갈래로 나눠 돌린다
-    p.append(logo(ic, "anthropic", CX, CY, 26, "lg core"))
-    for i, deg in enumerate([-150, -90, -30]):
-        ex, ey = on_ring(CX, CY, R - 26, deg)
-        d = f"M{CX},{CY} L{ex:.1f},{ey:.1f}"
-        p.append(f'<path class="spoke" d="{d}"/>')
-        p.append(packet(d, 0.02 + i * 0.02, 0.09 + i * 0.02, D3, 2.4))
-        p.append(packet(f"M{ex:.1f},{ey:.1f} L{CX},{CY}", 0.12 + i * 0.02, 0.18 + i * 0.02, D3, 2.4))
+    cols = [330, 490, 650, 810]
+    t = [0.32 + i * 0.03 for i in range(4)]
+    rail = CY3 - 60
+    for i, cx in enumerate(cols):
+        d = (f"M170,{CY3} C196,{CY3} 196,{rail} 222,{rail} "
+             f"H{cx} V{CY3 - 42}")
+        p.append(f'<path class="wire" d="{d}"/>')
+        p.append(packet(d, 0.14 + i * 0.03, 0.3 + i * 0.03, D3, 3))
 
-    # 다섯 자리 — 찾아보고 · 계획하고 · 고치고 · 확인하고 · 올린다
-    stations = [-90, 198, 126, 54, -18]
-    pts = [on_ring(CX, CY, R, d) for d in stations]
-    glyphs = []
-    (sx, sy) = pts[0]
-    glyphs.append(magnifier(sx, sy, 8, "box st s0"))
-    (sx, sy) = pts[1]
-    glyphs.append(doc(sx, sy, "box st s1"))
-    (sx, sy) = pts[2]
-    glyphs.append(brackets(sx, sy, "box st s2"))
-    (sx, sy) = pts[3]
-    glyphs.append(tick(sx, sy, 1.05, "tick st-tick",
-                       dash_draw(28, D3, 0.60, 0.70)))
-    (sx, sy) = pts[4]
-    glyphs.append(logo(ic, "git", sx, sy, 22, "lg st s4"))
-    for i, (px, py) in enumerate(pts):
-        p.append(f'<circle class="pad" cx="{px:.1f}" cy="{py:.1f}" r="17"/>')
-    p.extend(glyphs)
+    # 체키 — 같이 보는 예산. 막대가 차오른다
+    cx = cols[0]
+    p.append(phone(cx - 21, CY3 - 38, 42, 60))
+    p.append(f'<path class="hair2" d="M{cx - 13},{CY3 - 26} h26"/>')
+    for j in range(4):
+        p.append(f'<circle class="dot" cx="{cx - 12 + j * 8}" cy="{CY3 - 18}" r="1.5"/>')
+    base = CY3 + 11
+    for bx, h0, h1 in [(-11, 5, 16), (0, 11, 8), (11, 8, 19)]:
+        kt = f"0;{t[0]:.3f};{t[0] + 0.08:.3f};0.9;1"
+        ks = ".4 0 .2 1;.4 0 .2 1;0 0 1 1;.4 0 .2 1"
+        p.append(f'<rect class="fill-acc" x="{cx + bx - 3}" width="6" rx="1.5" y="{base - h0}" height="{h0}">'
+                 f'<animate attributeName="height" dur="{D3}s" repeatCount="indefinite"'
+                 f' values="{h0};{h0};{h1};{h1};{h0}" keyTimes="{kt}" calcMode="spline" keySplines="{ks}"/>'
+                 f'<animate attributeName="y" dur="{D3}s" repeatCount="indefinite"'
+                 f' values="{base - h0};{base - h0};{base - h1};{base - h1};{base - h0}"'
+                 f' keyTimes="{kt}" calcMode="spline" keySplines="{ks}"/></rect>')
 
-    # 자리를 지나가는 점
-    p.append(f'<circle r="4" fill="{ACC}"><animateMotion dur="{D3}s" repeatCount="indefinite"'
-             f' calcMode="linear" path="{ring_path(CX, CY, R)}"/></circle>')
-    for i in range(5):
-        a, b = i * 20, i * 20 + 7
-        kf.append(f"@keyframes st{i}{{0%,{a}%{{stroke:{BASE};opacity:.7}}"
-                  f"{a + 2}%,{b}%{{stroke:{ACC};opacity:1}}"
-                  f"{b + 7}%,100%{{stroke:{BASE};opacity:.7}}}}")
-        kf.append(f"@keyframes sf{i}{{0%,{a}%{{fill:{BASE};opacity:.7}}"
-                  f"{a + 2}%,{b}%{{fill:{ACC};opacity:1}}"
-                  f"{b + 7}%,100%{{fill:{BASE};opacity:.7}}}}")
-
-    # 쓰는 도구 — 고리 왼쪽에 붙여 둔다
-    for i, n in enumerate(["jirasoftware", "obsidian", "intellijidea"]):
-        ty = 430 + i * 56
-        p.append(f'<path class="hair2 dashed" d="M78,{ty} H{CX - R - 10:.0f}"/>')
-        p.append(f'<circle class="pad" cx="58" cy="{ty}" r="16"/>')
-        p.append(logo(ic, n, 58, ty, 19))
-
-    # 올린 뒤 배포까지 — 오른쪽으로 빠지는 길
-    # 올리기 자리에서 배포 길로 빠져나간다
-    gx, gy = pts[4]
-    lead = f"M{gx:.1f},{gy:.1f} C{gx + 30:.1f},{gy:.1f} {gx + 34:.1f},{CY} {gx + 62:.1f},{CY}"
-    rail = f"M{gx + 62:.1f},{CY} H846"
-    p.append(f'<path class="wire" d="{lead}"/>')
-    p.append(f'<path class="wire" d="{rail}"/>')
-    p.append(packet(lead, 0.785, 0.815, D3, 3.4))
-    for i, n in enumerate(["githubactions", "docker", "nginx", "cloudflare", "vercel"]):
-        lx = 388 + i * 86
-        p.append(f'<circle class="pad" cx="{lx}" cy="{CY}" r="17"/>')
-        p.append(logo(ic, n, lx, CY, 21))
-    p.append(packet(rail, 0.80, 0.95, D3, 3.4))
-    p.append(f'<circle class="lamp" cx="846" cy="{CY}" r="5"/>')
-    p.append(f'<circle class="lamp-ping" cx="846" cy="{CY}" r="5">'
-             f'<animate attributeName="r" dur="{D3}s" repeatCount="indefinite"'
-             f' values="5;5;14;14" keyTimes="0;0.95;0.995;1" calcMode="spline"'
-             f' keySplines="0 0 1 1;.2 .7 .3 1;0 0 1 1"/>'
+    # 품앗이 — 봉투에 한 장 넣는다
+    cx = cols[1]
+    p.append(phone(cx - 21, CY3 - 38, 42, 60))
+    p.append(f'<rect class="fill-acc" x="{cx - 7}" width="14" height="10" rx="1.5" y="{CY3 - 30}">'
+             f'<animate attributeName="y" dur="{D3}s" repeatCount="indefinite"'
+             f' values="{CY3 - 30};{CY3 - 30};{CY3 - 10};{CY3 - 10}"'
+             f' keyTimes="0;{t[1]:.3f};{t[1] + 0.07:.3f};1" calcMode="spline"'
+             f' keySplines="0 0 1 1;.4 0 .2 1;0 0 1 1"/>'
              f'<animate attributeName="opacity" dur="{D3}s" repeatCount="indefinite"'
-             f' values="0;0;.5;0;0" keyTimes="0;0.95;0.96;0.999;1"/></circle>')
+             f' values="0;0;1;1;0;0"'
+             f' keyTimes="0;{t[1] - 0.01:.3f};{t[1] + 0.01:.3f};{t[1] + 0.06:.3f};{t[1] + 0.075:.3f};1"/></rect>')
+    p.append(f'<g class="box"><rect x="{cx - 15}" y="{CY3 - 10}" width="30" height="20" rx="2.5"/>'
+             f'<path d="M{cx - 15},{CY3 - 10} l15,11 15,-11"/></g>')
+
+    # 여행 일정표 — 들른 곳을 선으로 잇는다
+    cx = cols[2]
+    p.append(browser(cx - 32, CY3 - 36, 64, 58))
+    route = (f"M{cx - 20},{CY3 + 10} C{cx - 13},{CY3 - 4} {cx - 3},{CY3 + 12} {cx + 5},{CY3 - 2} "
+             f"S{cx + 15},{CY3 - 13} {cx + 20},{CY3 - 11}")
+    p.append(f'<path class="wire" d="{route}"/>')
+    p.append(f'<path class="route-lit" d="{route}" stroke-dasharray="70" stroke-dashoffset="70">'
+             + dash_draw(70, D3, t[2], t[2] + 0.1) + '</path>')
+    p.append(f'<circle class="fill-acc" r="2.6"><animateMotion dur="{D3}s" repeatCount="indefinite"'
+             f' calcMode="linear" path="{route}" keyTimes="0;{t[2]:.3f};{t[2] + 0.1:.3f};1"'
+             f' keyPoints="0;0;1;1"/></circle>')
+
+    # ot-job — 모아서 알린다
+    cx = cols[3]
+    p.append(browser(cx - 32, CY3 - 36, 64, 58))
+    for j in range(3):
+        st = t[3] + j * 0.03
+        ly = CY3 - 12 + j * 11
+        p.append(f'<g opacity="0"><animate attributeName="opacity" dur="{D3}s"'
+                 f' repeatCount="indefinite" values="0;0;1;1;0;0"'
+                 f' keyTimes="0;{st:.3f};{st + 0.02:.3f};0.92;0.95;1"/>'
+                 f'<circle class="fill-acc" cx="{cx - 19}" cy="{ly}" r="2.2"/>'
+                 f'<path class="hair2" d="M{cx - 12},{ly} h26"/></g>')
+    pivot = f"{cx + 23} {CY3 + 10}"
+    p.append(f'<g class="bell"><circle class="pad-solid" cx="{cx + 23}" cy="{CY3 + 17}" r="11"/>'
+             f'<g class="box"><path d="M{cx + 17},{CY3 + 20} a6,6 0 0 1 12,0 v3 l1.8,2.8 h-15.6 l1.8,-2.8 Z"/>'
+             f'<path d="M{cx + 21.2},{CY3 + 27} a1.8,1.8 0 0 0 3.6,0"/></g>'
+             f'<animateTransform attributeName="transform" type="rotate" dur="{D3}s"'
+             f' repeatCount="indefinite"'
+             f' values="0 {pivot};0 {pivot};-12 {pivot};10 {pivot};-6 {pivot};0 {pivot};0 {pivot}"'
+             f' keyTimes="0;{t[3] + 0.09:.3f};{t[3] + 0.12:.3f};{t[3] + 0.15:.3f};'
+             f'{t[3] + 0.18:.3f};{t[3] + 0.21:.3f};1"/></g>')
+
+    # 각 결과물이 선 기술
+    decks = [["react", "typescript", "spring"], ["kotlin", "jetpackcompose"],
+             ["cloudflare"], ["python", "vercel"]]
+    for cx, names in zip(cols, decks):
+        x0 = cx - (len(names) - 1) * 13
+        for j, n in enumerate(names):
+            p.append(logo(ic, n, x0 + j * 26, CY3 + 48, 18))
 
     css = f"""
   .box, .wire, .ring, .spoke, .pulse, .hair, .hair2, .node, .tick {{ fill: none; }}
@@ -365,6 +380,9 @@ def build(ic):
   .pulse {{ stroke: {BASE}; stroke-opacity: .2; stroke-width: 1.2; stroke-linejoin: round; }}
   .pulse-lit {{ stroke: {ACC}; stroke-opacity: .95; stroke-width: 1.5; stroke-linejoin: round; fill: none; }}
   .chunk {{ fill: {ACC}; fill-opacity: .85; }}
+  .fill-acc {{ fill: {ACC}; fill-opacity: .8; }}
+  .pad-solid {{ fill: #0d1117; fill-opacity: 0; }}
+  .route-lit {{ fill: none; stroke: {ACC}; stroke-opacity: .95; stroke-width: 1.6; stroke-linecap: round; }}
   .bar-bg {{ fill: {BASE}; fill-opacity: .12; }}
   .bar {{ fill: {ACC}; fill-opacity: .55; }}
   .tick {{ stroke: {OK}; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }}
