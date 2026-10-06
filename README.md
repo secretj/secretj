@@ -43,15 +43,3 @@
 <img src="https://img.shields.io/badge/Python-24292f?style=flat-square&logo=python&logoColor=white" alt="Python">
 </td></tr>
 </table>
-
-<br>
-
-## 공개 저장소
-
-| | |
-|---|---|
-| **[promptfit](https://github.com/secretj/promptfit)** | 써 둔 프롬프트를 claude.ai / ChatGPT / Claude Code 각 환경에 맞는 파일로 뽑아 준다 · `Astro` `Cloudflare Pages` `D1` |
-| **[ot-job](https://github.com/secretj/ot-job)** | 서울 작업치료 채용 공고를 긁어서 카카오톡으로 보내 준다 · `Python` `Flask` `Neon Postgres` `GitHub Actions` |
-| **[secretj-claude-config](https://github.com/secretj/secretj-claude-config)** | 내 Claude Code 설정 (agents / skills / hooks), `install.sh` 로 환경 복원 |
-| **[Lien](https://github.com/secretj/Lien)** | JWT 인증 붙여 본 프로젝트 · `Spring Boot` `Spring Security` `Redis` `MySQL` |
-| **[Discord-pubg-bot](https://github.com/secretj/Discord-pubg-bot)** | 배그 랭크 보고 디스코드 역할 자동으로 바꿔 주는 봇 · `Kotlin` |
