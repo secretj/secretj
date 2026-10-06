@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="190" viewBox="0 0 880 190" role="img" aria-label="웹·앱·외부 시스템의 요청이 API 서버로 들어오고, 서버가 데이터베이스·캐시·검색·배치로 뻗었다가 응답으로 돌아나가는 구조">
+<style>
+  .t  { font: 400 11px -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; fill: #8b949e; text-anchor: middle; }
+  .tb { font: 600 12px -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; fill: #8b949e; text-anchor: middle; }
+  .pill { fill: none; stroke-opacity: .34; stroke-width: 1.2; }
+  .wire { fill: none; stroke: #8b949e; stroke-opacity: .25; stroke-width: 1.2; }
+  g.n { stroke: #8b949e; animation-duration: 8s; animation-iteration-count: infinite; animation-timing-function: ease-out; }
+  .a { animation-name: pa } .b { animation-name: pb } .c { animation-name: pc }
+  @keyframes pa { 0%,6%{stroke:#4493f8} 16%,82%{stroke:#8b949e} 86%,92%{stroke:#4493f8} 100%{stroke:#8b949e} }
+  @keyframes pb { 0%,11%{stroke:#8b949e} 14%,20%{stroke:#4493f8} 30%,61%{stroke:#8b949e} 64%,70%{stroke:#4493f8} 80%,100%{stroke:#8b949e} }
+  @keyframes pc { 0%,33%{stroke:#8b949e} 36%,44%{stroke:#4493f8} 54%,100%{stroke:#8b949e} }
+</style>
+
+<path class="wire" d="M215,95 H315"/>
+<path class="wire" d="M465,95 C510,95 540,32 590,32"/>
+<path class="wire" d="M465,95 C510,95 540,74 590,74"/>
+<path class="wire" d="M465,95 C510,95 540,116 590,116"/>
+<path class="wire" d="M465,95 C510,95 540,158 590,158"/>
+
+<g class="n a"><rect class="pill" x="65" y="82" width="150" height="26" rx="13"/></g>
+<text x="140" y="99" class="t">웹 · 앱 · 외부 시스템</text>
+
+<g class="n b"><rect class="pill" x="315" y="73" width="150" height="44" rx="12"/></g>
+<text x="390" y="99" class="tb">API 서버</text>
+
+<g class="n c">
+  <rect class="pill" x="590" y="19" width="220" height="26" rx="13"/>
+  <rect class="pill" x="590" y="61" width="220" height="26" rx="13"/>
+  <rect class="pill" x="590" y="103" width="220" height="26" rx="13"/>
+  <rect class="pill" x="590" y="145" width="220" height="26" rx="13"/>
+</g>
+<text x="700" y="36" class="t">데이터베이스 · 스키마 · 쿼리</text>
+<text x="700" y="78" class="t">캐시 · 세션</text>
+<text x="700" y="120" class="t">검색 · 인덱싱</text>
+<text x="700" y="162" class="t">배치 · 큐 · 스케줄러</text>
+
+<g fill="#4493f8">
+  <circle r="3.3"><animateMotion dur="8s" repeatCount="indefinite" calcMode="linear" path="M215,95 H315" keyTimes="0;0.02;0.12;1" keyPoints="0;0;1;1"/><animate attributeName="opacity" dur="8s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.015;0.03;0.125;0.14;1"/></circle>
+  <circle r="3.3"><animateMotion dur="8s" repeatCount="indefinite" calcMode="linear" path="M465,95 C510,95 540,32 590,32" keyTimes="0;0.18;0.34;1" keyPoints="0;0;1;1"/><animate attributeName="opacity" dur="8s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.175;0.19;0.345;0.36;1"/></circle>
+  <circle r="3.3"><animateMotion dur="8s" repeatCount="indefinite" calcMode="linear" path="M465,95 C510,95 540,74 590,74" keyTimes="0;0.18;0.34;1" keyPoints="0;0;1;1"/><animate attributeName="opacity" dur="8s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.175;0.19;0.345;0.36;1"/></circle>
+  <circle r="3.3"><animateMotion dur="8s" repeatCount="indefinite" calcMode="linear" path="M465,95 C510,95 540,116 590,116" keyTimes="0;0.18;0.34;1" keyPoints="0;0;1;1"/><animate attributeName="opacity" dur="8s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.175;0.19;0.345;0.36;1"/></circle>
+  <circle r="3.3"><animateMotion dur="8s" repeatCount="indefinite" calcMode="linear" path="M465,95 C510,95 540,158 590,158" keyTimes="0;0.18;0.34;1" keyPoints="0;0;1;1"/><animate attributeName="opacity" dur="8s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.175;0.19;0.345;0.36;1"/></circle>
+  <circle r="3.3"><animateMotion dur="8s" repeatCount="indefinite" calcMode="linear" path="M590,32 C540,32 510,95 465,95" keyTimes="0;0.46;0.62;1" keyPoints="0;0;1;1"/><animate attributeName="opacity" dur="8s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.455;0.47;0.625;0.64;1"/></circle>
+  <circle r="3.3"><animateMotion dur="8s" repeatCount="indefinite" calcMode="linear" path="M590,74 C540,74 510,95 465,95" keyTimes="0;0.46;0.62;1" keyPoints="0;0;1;1"/><animate attributeName="opacity" dur="8s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.455;0.47;0.625;0.64;1"/></circle>
+  <circle r="3.3"><animateMotion dur="8s" repeatCount="indefinite" calcMode="linear" path="M590,116 C540,116 510,95 465,95" keyTimes="0;0.46;0.62;1" keyPoints="0;0;1;1"/><animate attributeName="opacity" dur="8s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.455;0.47;0.625;0.64;1"/></circle>
+  <circle r="3.3"><animateMotion dur="8s" repeatCount="indefinite" calcMode="linear" path="M590,158 C540,158 510,95 465,95" keyTimes="0;0.46;0.62;1" keyPoints="0;0;1;1"/><animate attributeName="opacity" dur="8s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.455;0.47;0.625;0.64;1"/></circle>
+  <circle r="3.3"><animateMotion dur="8s" repeatCount="indefinite" calcMode="linear" path="M315,95 H215" keyTimes="0;0.7;0.82;1" keyPoints="0;0;1;1"/><animate attributeName="opacity" dur="8s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.695;0.71;0.825;0.84;1"/></circle>
+</g>
+</svg>
