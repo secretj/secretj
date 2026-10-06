@@ -22,7 +22,7 @@ BASE = "#8b949e"
 ACC = "#4493f8"
 OK = "#3fb950"
 
-W, H = 880, 566
+W, H = 880, 600
 CDN = "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/{}.svg"
 
 ICONS = [
@@ -151,6 +151,11 @@ def dash_draw(length, dur, t0, t1):
             f' calcMode="spline" keySplines="0 0 1 1;.2 .8 .2 1;0 0 1 1;0 0 1 1;0 0 1 1"/>')
 
 
+def text(x, y, body, cls="t", anchor="middle"):
+    """라벨. 글꼴은 시스템 기본만 쓴다 (GitHub 는 외부 글꼴을 받지 않는다)."""
+    return f'<text class="{cls}" x="{x}" y="{y}" text-anchor="{anchor}">{body}</text>'
+
+
 def ring_path(cx, cy, r):
     """위에서 시작해 시계 반대 방향으로 도는 원."""
     return (f"M{cx},{cy - r} A{r},{r} 0 1 0 {cx},{cy + r} "
@@ -177,8 +182,10 @@ def build(ic):
     p.append(phone(76, 128, 46, 80))
     for i, n in enumerate(["kotlin", "jetpackcompose"]):
         p.append(logo(ic, n, 99, 170 + i * 20, 14))
+    p.append(text(99, 230, "웹 · 앱"))
 
     # API 서버 — 안쪽에 서버 쪽 로고
+    p.append(text(370, 72, "API 서버", "tb"))
     p.append('<rect class="node n1" x="296" y="84" width="148" height="60" rx="14"/>')
     for i, n in enumerate(["openjdk", "spring", "php"]):
         p.append(logo(ic, n, 336 + i * 34, 114, 22))
@@ -192,14 +199,15 @@ def build(ic):
 
     # 저장소·작업 네 줄
     rows = [
-        (44, lambda: cylinder(676, 44, 22, 24) + logo(ic, "postgresql", 712, 44, 18)
-         + logo(ic, "mariadb", 748, 44, 18)),
-        (90, lambda: bolt(694, 90) + logo(ic, "redis", 730, 90, 20)),
-        (136, lambda: magnifier(694, 136) + logo(ic, "elasticsearch", 730, 136, 19)),
-        (182, lambda: clock(700, 182) + logo(ic, "python", 736, 182, 18)),
+        (44, "데이터베이스", lambda: logo(ic, "postgresql", 782, 44, 18)
+         + logo(ic, "mariadb", 812, 44, 18)),
+        (90, "캐시", lambda: logo(ic, "redis", 812, 90, 20)),
+        (136, "검색", lambda: logo(ic, "elasticsearch", 812, 136, 19)),
+        (182, "정해진 시간에 도는 작업", lambda: clock(812, 182, 9)),
     ]
-    for i, (cy, draw) in enumerate(rows):
-        p.append(f'<rect class="node n2" x="600" y="{cy - 18}" width="240" height="36" rx="18"/>')
+    for i, (cy, label, draw) in enumerate(rows):
+        p.append(f'<rect class="node n2" x="600" y="{cy - 18}" width="260" height="36" rx="18"/>')
+        p.append(text(620, cy + 4, label, "t", "start"))
         p.append(draw())
 
     # 선
@@ -207,8 +215,8 @@ def build(ic):
         ("M158,78 C210,78 240,114 296,114", 0.02, 0.15),       # 브라우저 → 서버
         ("M122,168 C190,168 230,114 296,114", 0.03, 0.16),      # 휴대폰 → 서버
     ]
-    fan = [f"M444,114 C498,114 540,{cy} 600,{cy}" for cy, _ in rows]
-    back = [f"M600,{cy} C540,{cy} 498,114 444,114" for cy, _ in rows]
+    fan = [f"M444,114 C498,114 540,{cy} 600,{cy}" for cy, _, _ in rows]
+    back = [f"M600,{cy} C540,{cy} 498,114 444,114" for cy, _, _ in rows]
     for d, _, _ in wires:
         p.append(f'<path class="wire" d="{d}"/>')
     for d in fan:
@@ -229,15 +237,18 @@ def build(ic):
     kf.append("@keyframes n2{0%,30%{stroke:" + BASE + "}36%,44%{stroke:" + ACC
               + "}56%,100%{stroke:" + BASE + "}}")
 
-    p.append('<path class="rule" d="M40,232 H840"/>')
+    p.append('<path class="rule" d="M40,250 H860"/>')
 
     # ============ 2. 이관: 옮기고 하나씩 맞춰 본다 ============
     D2 = 12
-    p.append(cylinder(120, 286, 46, 50))
-    p.append(cylinder(760, 286, 46, 50))
-    p.append('<path class="wire" d="M152,286 H728"/>')
-    p.append('<rect class="bar-bg" x="152" y="312" width="576" height="4" rx="2"/>')
-    p.append(f'<rect class="bar" x="152" y="312" width="576" height="4" rx="2">'
+    p.append(cylinder(120, 300, 46, 50))
+    p.append(cylinder(760, 300, 46, 50))
+    p.append(text(120, 350, "옮기기 전"))
+    p.append(text(760, 350, "옮긴 뒤"))
+    p.append(text(440, 272, "데이터 이관, 옮긴 뒤 하나씩 맞춰 보기"))
+    p.append('<path class="wire" d="M152,300 H728"/>')
+    p.append('<rect class="bar-bg" x="152" y="326" width="576" height="4" rx="2"/>')
+    p.append(f'<rect class="bar" x="152" y="326" width="576" height="4" rx="2">'
              f'<animate attributeName="width" dur="{D2}s" repeatCount="indefinite"'
              f' values="0;0;576;576;0;0" keyTimes="0;0.06;0.78;0.92;0.93;1" calcMode="linear"/>'
              f'</rect>')
@@ -245,7 +256,7 @@ def build(ic):
     # 덩어리 여섯 묶음이 차례로 건너간다
     for i in range(6):
         t0 = 0.05 + i * 0.12
-        d = "M152,286 H728"
+        d = "M152,300 H728"
         p.append(f'<rect class="chunk" x="-5" y="-5" width="10" height="10" rx="2.5">'
                  f'<animateMotion dur="{D2}s" repeatCount="indefinite" calcMode="linear"'
                  f' path="{d}" keyTimes="0;{t0:.4f};{t0 + 0.1:.4f};1" keyPoints="0;0;1;1"/>'
@@ -255,7 +266,7 @@ def build(ic):
                  f'</rect>')
         # 도착한 만큼 체크가 하나씩 쌓인다
         cx = 690 + (i % 3) * 26
-        cy = 346 if i < 3 else 364
+        cy = 362 if i < 3 else 380
         p.append(tick(cx, cy, 0.62, "tick small",
                       f'<animate attributeName="opacity" dur="{D2}s" repeatCount="indefinite"'
                       f' values="0;0;1;1;0;0"'
@@ -265,18 +276,20 @@ def build(ic):
     p.append(f'<g><animateTransform attributeName="transform" type="translate"'
              f' dur="{D2}s" repeatCount="indefinite"'
              f' values="0,0;0,0;486,0;486,0;0,0" keyTimes="0;0.06;0.78;0.9;1"'
-             f' calcMode="linear"/>{magnifier(196, 262, 9)}</g>')
+             f' calcMode="linear"/>{magnifier(196, 288, 9)}</g>')
 
     # 다 옮긴 뒤 한 번 더 맞춰 본다
-    p.append(tick(760, 238, 1.25, "tick big",
+    p.append(tick(760, 252, 1.25, "tick big",
                   dash_draw(34, D2, 0.80, 0.88)))
 
-    p.append('<path class="rule" d="M40,398 H840"/>')
+    p.append('<path class="rule" d="M40,410 H860"/>')
 
     # ============ 3. 혼자 만들어 운영 중인 것들 ============
     D3 = 12
-    CY3 = 478
+    CY3 = 492
     p.append(brackets(60, CY3, "box"))                  # 코드를 쓴다
+    p.append(text(60, CY3 + 30, "코드"))
+    p.append(text(152, CY3 + 30, "빌드"))
     p.append(f'<path class="wire" d="M76,{CY3} H132"/>')
     p.append(f'<circle class="pad" cx="152" cy="{CY3}" r="18"/>')
     p.append(logo(ic, "githubactions", 152, CY3, 22))   # 빌드해서 내보낸다
@@ -356,12 +369,16 @@ def build(ic):
              f'{t[3] + 0.18:.3f};{t[3] + 0.21:.3f};1"/></g>')
 
     # 각 결과물이 선 기술
+    names4 = ["체키", "품앗이", "여행 일정표", "ot-job"]
+    notes = ["가계부 · 캘린더", "경조사비 장부", "여행 계획 기록", "공고 모아 알림"]
     decks = [["react", "typescript", "spring"], ["kotlin", "jetpackcompose"],
              ["cloudflare"], ["python", "vercel"]]
-    for cx, names in zip(cols, decks):
+    for cx, nm, note, names in zip(cols, names4, notes, decks):
+        p.append(text(cx, CY3 + 42, nm, "tb"))
+        p.append(text(cx, CY3 + 58, note, "ts"))
         x0 = cx - (len(names) - 1) * 13
         for j, n in enumerate(names):
-            p.append(logo(ic, n, x0 + j * 26, CY3 + 48, 18))
+            p.append(logo(ic, n, x0 + j * 26, CY3 + 78, 18))
 
     css = f"""
   .box, .wire, .ring, .spoke, .pulse, .hair, .hair2, .node, .tick {{ fill: none; }}
@@ -375,6 +392,10 @@ def build(ic):
   .hair2 {{ stroke: {BASE}; stroke-opacity: .28; stroke-width: 1; }}
   .dashed {{ stroke-dasharray: 2 4; }}
   .dot {{ fill: {BASE}; fill-opacity: .4; }}
+  text {{ font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD Gothic Neo","Malgun Gothic",sans-serif; }}
+  .t {{ font-size: 11.5px; font-weight: 400; fill: {BASE}; fill-opacity: .9; }}
+  .tb {{ font-size: 12.5px; font-weight: 600; fill: {BASE}; fill-opacity: 1; }}
+  .ts {{ font-size: 10.5px; font-weight: 400; fill: {BASE}; fill-opacity: .66; }}
   .pad {{ fill: {BASE}; fill-opacity: .055; stroke: {BASE}; stroke-opacity: .16; stroke-width: 1; }}
   .lg path {{ fill: {BASE}; fill-opacity: .82; }}
   .pulse {{ stroke: {BASE}; stroke-opacity: .2; stroke-width: 1.2; stroke-linejoin: round; }}
