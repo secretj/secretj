@@ -185,8 +185,8 @@ YEARS = [
      [("칩", "C#"), "dotnet"]),
     ("2023", ["두 번째 회사 · PHP", "CI3 → CI4 전환", "DDD · Queue"],
      ["php", "codeigniter", "redis", "elasticsearch"]),
-    ("2024", ["가장 많이 쓴 해", "커밋 1,796"], []),
-    ("2025", ["AI 를 쓰기 시작", "Cursor"],
+    ("2024", ["게시판 · 메일 API", "기능 개발과 장애 대응", "커밋 1,796"], []),
+    ("2025", ["코딩 표준 · 에러 통합", "2단계 인증, 속도 개선", "Cursor 를 쓰기 시작"],
      [("칩", "Cursor")]),
     ("2026", ["Claude Code 로", "혼자 만들어 운영"],
      ["anthropic", "python", "kotlin", "react", "typescript"]),
@@ -255,7 +255,7 @@ def build_timeline(ic):
   .axis {{ fill: none; stroke: {BASE}; stroke-opacity: .2; stroke-width: 1.2; }}
   .yr {{ font-size: 14px; font-weight: 700; fill: {BASE}; fill-opacity: 1; }}
   .ln {{ font-size: 11.5px; font-weight: 600; fill: {BASE}; fill-opacity: .92; }}
-  .ln2 {{ font-size: 10.5px; font-weight: 400; fill: {BASE}; fill-opacity: .62; }}
+  .ln2 {{ font-size: 10px; font-weight: 400; fill: {BASE}; fill-opacity: .62; }}
   .node-y {{ fill: {ACC}; fill-opacity: .9; }}
   .node-q {{ fill: none; stroke: {BASE}; stroke-opacity: .5; stroke-width: 1.4; stroke-dasharray: 3 3; }}
   .lg path {{ fill: {BASE}; fill-opacity: .82; }}
