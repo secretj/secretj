@@ -11,6 +11,7 @@
 """
 
 import argparse
+import json
 import os
 import re
 import sys
@@ -39,6 +40,12 @@ ICONS = [
     "php", "codeigniter", "redis", "elasticsearch",
     "anthropic", "python", "kotlin", "react", "typescript",
 ]
+
+
+def load_grass(path):
+    """연도별 잔디를 읽는다. tools/fetch-contributions.py 로 다시 받을 수 있다."""
+    with open(path) as f:
+        return json.load(f)
 
 
 def load_icons(icon_dir):
@@ -85,9 +92,9 @@ def chip(cx, cy, label, cls="chip"):
 YEARS = [
     ("2021", ["자바로 시작", "부트캠프에서 웹 전반"],
      ["openjdk", "html5", "javascript", "spring"]),
-    ("2022", ["첫 회사 입사", "C# 과 Java"],
+    ("2022", ["개발자로 일 시작", "C# 과 Java"],
      [("칩", "C#"), "dotnet"]),
-    ("2023", ["두 번째 회사 · PHP", "CI3 → CI4 전환", "DDD · Queue"],
+    ("2023", ["PHP 환경으로 이직", "프레임워크 버전업", "SSR → CSR"],
      ["php", "codeigniter", "redis", "elasticsearch"]),
     ("2024", ["게시판 · 메일 API", "기능 개발과 장애 대응", "커밋 1,796"], []),
     ("2025", ["코딩 표준 · 에러 통합", "2단계 인증, 속도 개선", "Cursor 를 쓰기 시작"],
@@ -98,9 +105,40 @@ YEARS = [
 ]
 
 
-def build_timeline(ic):
-    """해마다 무엇이 쌓였는지 위에 적고, 쌓인 것을 아래에 모아 둔다."""
-    W2, H2 = 880, 246
+# 잔디 격자. 칸 하나는 CELL, 칸 사이는 GAP 만큼 띄운다.
+CELL, GAP = 11, 2
+GRASS_X, GRASS_Y = 96, 170
+
+
+def level(count):
+    """하루 커밋 수를 네 단계로 나눈다. 해마다 양이 달라 기준은 고정한다."""
+    if count == 0:
+        return 0
+    if count <= 2:
+        return 1
+    if count <= 5:
+        return 2
+    if count <= 10:
+        return 3
+    return 4
+
+
+def cells(weeks, want):
+    """같은 단계인 칸들을 path 하나로 묶는다. rect 를 수백 개 쓰지 않으려는 것이다."""
+    d = []
+    for wi, col in enumerate(weeks):
+        for day, c in enumerate(col):
+            if level(c) != want:
+                continue
+            x = GRASS_X + wi * (CELL + GAP)
+            y = GRASS_Y + day * (CELL + GAP)
+            d.append(f"M{x},{y}h{CELL}v{CELL}h-{CELL}z")
+    return "".join(d)
+
+
+def build_timeline(ic, grass):
+    """위에 연표, 가운데 그해 잔디, 아래에 그때까지 쌓인 것을 둔다."""
+    W2, H2 = 880, 336
     DUR = 6
     cols = [56 + i * 122 for i in range(7)]
     axis_y, p, kf = 74, [], []
@@ -133,6 +171,31 @@ def build_timeline(ic):
                      f' text-anchor="middle" fill="{soft}">?</text>')
         p.append(f'<g class="y{i}">' + "".join(g) + '</g>')
 
+    # ── 가운데: 그해 잔디 ────────────────────────────────────────────────
+    weeks_n = max(len(g["weeks"]) for g in grass.values())
+    empty = []
+    for wi in range(weeks_n):
+        for day in range(7):
+            x = GRASS_X + wi * (CELL + GAP)
+            y = GRASS_Y + day * (CELL + GAP)
+            empty.append(f"M{x},{y}h{CELL}v{CELL}h-{CELL}z")
+    p.append(f'<path d="{"".join(empty)}" fill="{BASE}" fill-opacity=".09"/>')
+
+    for i, (year, _, _) in enumerate(YEARS):
+        if year not in grass:
+            continue
+        ink, soft = TONES[i]
+        g = grass[year]
+        box = []
+        for lv, (color, op) in enumerate(
+                [(soft, .4), (soft, .66), (soft, .9), (ink, .95)], start=1):
+            d = cells(g["weeks"], lv)
+            if d:
+                box.append(f'<path d="{d}" fill="{color}" fill-opacity="{op}"/>')
+        box.append(f'<text class="ln2" x="{GRASS_X}" y="{GRASS_Y - 9}"'
+                   f' text-anchor="start" fill="{ink}">{g["total"]:,} contributions</text>')
+        p.append(f'<g class="g{i}">' + "".join(box) + '</g>')
+
     # 해를 지나가는 점
     hop = ";".join(t[1] for t in TONES)
     p.append(f'<circle r="4.5" fill="{TONES[0][1]}">'
@@ -145,7 +208,7 @@ def build_timeline(ic):
              f' values="0;1;1;0;0" keyTimes="0;0.05;0.86;0.93;1"/></circle>')
 
     # ── 아래: 그때까지 쌓인 것 ────────────────────────────────────────────
-    stack_y = 212
+    stack_y = 300
     p.append(f'<path d="M34,{stack_y - 30} H846" fill="none" stroke="url(#ax)"'
              f' stroke-opacity=".45" stroke-width="1.4" stroke-linecap="round"/>')
 
@@ -172,6 +235,18 @@ def build_timeline(ic):
         x += wd + gap
 
     for i in range(len(YEARS)):
+        if str(YEARS[i][0]) in grass:
+            a = (0.04 + i * 0.112) * 100
+            nxt = 0.04 + (i + 1) * 0.112
+            if str(YEARS[i + 1][0]) in grass:
+                b = nxt * 100
+                kf.append(f"@keyframes g{i}{{0%,{a:.1f}%{{opacity:0}}"
+                          f"{a + 2.5:.1f}%,{b:.1f}%{{opacity:1}}"
+                          f"{b + 2.5:.1f}%,100%{{opacity:0}}}}")
+            else:                       # 마지막 해는 끝까지 남는다
+                kf.append(f"@keyframes g{i}{{0%,{a:.1f}%{{opacity:0}}"
+                          f"{a + 2.5:.1f}%,100%{{opacity:1}}}}")
+    for i in range(len(YEARS)):
         begin = 0.04 + i * 0.112
         kf.append(f"@keyframes y{i}{{0%,{begin * 100:.1f}%{{opacity:0;transform:translateY(7px)}}"
                   f"{(begin + 0.035) * 100:.1f}%,100%{{opacity:1;transform:translateY(0)}}}}")
@@ -188,16 +263,19 @@ def build_timeline(ic):
   .chip {{ fill: none; stroke-opacity: .8; stroke-width: 1.1; }}
   .chip-t {{ font-size: 10.5px; font-weight: 600; }}
   .mark {{ font-size: 26px; font-weight: 700; fill-opacity: .7; }}
-  g[class^="y"] {{ animation-duration: {DUR}s; animation-iteration-count: 1;
+  g[class^="y"], g[class^="g"] {{ animation-duration: {DUR}s; animation-iteration-count: 1;
     animation-fill-mode: both; animation-timing-function: cubic-bezier(.2,.8,.2,1); }}
 """
     for i in range(len(YEARS)):
         css += f"  .y{i} {{ animation-name: y{i}; }}\n"
+        if str(YEARS[i][0]) in grass:
+            css += f"  .g{i} {{ animation-name: g{i}; }}\n"
 
     alt = ("2021 년 자바로 시작해 부트캠프에서 웹 전반을 익히고, 2022 년 첫 회사에서 C# 과 자바를, "
            "2023 년 두 번째 회사에서 PHP 와 코드이그나이터, 레디스, 엘라스틱서치를 쓰고, "
            "2024 년에 가장 많이 작업했고, 2025 년 커서, 2026 년 클로드 코드를 쓴 연표. "
            "아래 줄에는 그때까지 쌓인 기술이 해마다 하나씩 더해진다. "
+           "가운데에는 그해 커밋을 날짜별로 칠한 잔디가 해마다 바뀌며 나타난다. "
            "마지막 칸은 다음엔 무엇을 쌓게 될까라는 물음")
 
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W2}" height="{H2}" '
@@ -212,8 +290,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("out", nargs="?", default=os.path.join(here, "assets", "timeline.svg"))
     ap.add_argument("--icon-dir", default=os.path.join(here, "tools", "icons"))
+    ap.add_argument("--grass", default=os.path.join(here, "tools", "contributions.json"))
     a = ap.parse_args()
-    svg = build_timeline(load_icons(a.icon_dir))
+    svg = build_timeline(load_icons(a.icon_dir), load_grass(a.grass))
     with open(a.out, "w") as f:
         f.write(svg)
     print(f"{a.out} {len(svg)} bytes")
