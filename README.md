@@ -16,10 +16,12 @@
 <tr>
 <td valign="top">
 <b>메일 서비스 백엔드</b><br>
-<sub>운영 중인 기능 수정과 장애 대응 · 데이터 이관과 이관한 뒤 원본 대사 · 대량 발송·수신 처리 · 정해진 시간에 도는 작업</sub><br><br>
+<sub>웹메일 API · 계정과 인증 · 게시판 · 아카이브 · 배치</sub><br>
+<sub>기능 개발과 장애 대응, 취약점 대응과 인증 강화, 데이터 이관과 검증, 코드 표준과 속도 개선</sub><br><br>
 <img src="https://img.shields.io/badge/Java-f3cdb3?style=flat-square&logo=openjdk&logoColor=8a4b1e" alt="Java">
 <img src="https://img.shields.io/badge/Spring%20Boot-c3e6c4?style=flat-square&logo=springboot&logoColor=2f6b33" alt="Spring Boot">
 <img src="https://img.shields.io/badge/PHP-cbc5ef?style=flat-square&logo=php&logoColor=45407c" alt="PHP">
+<img src="https://img.shields.io/badge/React-aee0f5?style=flat-square&logo=react&logoColor=15657f" alt="React">
 <img src="https://img.shields.io/badge/MariaDB-e9d2bb?style=flat-square&logo=mariadb&logoColor=6b4a2a" alt="MariaDB">
 <img src="https://img.shields.io/badge/Redis-f4bcbc?style=flat-square&logo=redis&logoColor=8c2f2f" alt="Redis">
 <img src="https://img.shields.io/badge/Elasticsearch-bbe3d9?style=flat-square&logo=elasticsearch&logoColor=1f6b5c" alt="Elasticsearch">
