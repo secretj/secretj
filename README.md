@@ -25,6 +25,7 @@
 <img src="https://img.shields.io/badge/Elasticsearch-bbe3d9?style=flat-square&logo=elasticsearch&logoColor=1f6b5c" alt="Elasticsearch">
 <img src="https://img.shields.io/badge/RabbitMQ-f8cba8?style=flat-square&logo=rabbitmq&logoColor=9c4f12" alt="RabbitMQ">
 <img src="https://img.shields.io/badge/JWT-e8c3dd?style=flat-square&logo=jsonwebtokens&logoColor=6b2f5c" alt="JWT">
+<img src="https://img.shields.io/badge/Swagger-cfe8a8?style=flat-square&logo=swagger&logoColor=4a6b1e" alt="Swagger">
 <img src="https://img.shields.io/badge/Sentry-c9c2e0?style=flat-square&logo=sentry&logoColor=3b3366" alt="Sentry">
 </td>
 </tr>
