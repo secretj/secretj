@@ -27,6 +27,7 @@
 <img src="https://img.shields.io/badge/JWT-e8c3dd?style=flat-square&logo=jsonwebtokens&logoColor=6b2f5c" alt="JWT">
 <img src="https://img.shields.io/badge/Swagger-cfe8a8?style=flat-square&logo=swagger&logoColor=4a6b1e" alt="Swagger">
 <img src="https://img.shields.io/badge/Sentry-c9c2e0?style=flat-square&logo=sentry&logoColor=3b3366" alt="Sentry">
+<img src="https://img.shields.io/badge/Linux-f2e3b8?style=flat-square&logo=linux&logoColor=7a5c1e" alt="Linux">
 </td>
 </tr>
 </table>
