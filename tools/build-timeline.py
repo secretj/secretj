@@ -18,8 +18,19 @@ import urllib.request
 
 # ── 색 ─────────────────────────────────────────────────────────────────────
 # 밝은 테마와 어두운 테마 양쪽에서 읽히는 중간 회색을 기본으로 쓴다.
-BASE = "#8b949e"
-ACC = "#4493f8"
+BASE = "#8b94a3"
+
+# 해마다 색을 달리한다. 앞이 글자용(조금 진한 쪽), 뒤가 점과 로고용(연한 쪽).
+# 흰 배경과 #0d1117 양쪽에서 읽히도록 중간 밝기로 잡았다.
+TONES = [
+    ("#5a9ee6", "#8fc2f2"),   # 하늘
+    ("#8d7ce8", "#b3a6f0"),   # 라벤더
+    ("#3bb49c", "#7ad3bf"),   # 민트
+    ("#e2904e", "#f0b583"),   # 살구
+    ("#e07aa0", "#f0a6c0"),   # 로즈
+    ("#a96fe0", "#c7a3ef"),   # 보라
+    ("#95a0ad", "#b3bcc7"),   # 마지막 칸은 색을 빼 둔다
+]
 
 CDN = "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/{}.svg"
 
@@ -94,24 +105,40 @@ def build_timeline(ic):
     cols = [56 + i * 122 for i in range(7)]
     axis_y, p, kf = 74, [], []
 
-    p.append(f'<path class="axis" d="M34,{axis_y} H846"/>')
+    stops = "".join(
+        f'<stop offset="{i / (len(TONES) - 1) * 100:.0f}%" stop-color="{t[1]}"/>'
+        for i, t in enumerate(TONES))
+    p.append(f'<defs><linearGradient id="ax" x1="0" y1="0" x2="1" y2="0">{stops}'
+             f'</linearGradient></defs>')
+    p.append(f'<path d="M34,{axis_y} H846" fill="none" stroke="url(#ax)"'
+             f' stroke-opacity=".8" stroke-width="2" stroke-linecap="round"/>')
 
     for i, (year, lines, _) in enumerate(YEARS):
         cx = cols[i]
         last = i == len(YEARS) - 1
-        g = [f'<text class="yr" x="{cx}" y="52" text-anchor="middle">{year}</text>']
-        g.append(f'<circle class="{"node-q" if last else "node-y"}"'
-                 f' cx="{cx}" cy="{axis_y}" r="{7 if last else 5.5}"/>')
+        ink, soft = TONES[i]
+        g = [f'<text class="yr" x="{cx}" y="52" text-anchor="middle"'
+             f' fill="{ink}">{year}</text>']
+        if last:
+            g.append(f'<circle class="node-q" cx="{cx}" cy="{axis_y}" r="7"/>')
+        else:
+            g.append(f'<circle cx="{cx}" cy="{axis_y}" r="11" fill="{soft}"'
+                     f' fill-opacity=".22"/>')
+            g.append(f'<circle cx="{cx}" cy="{axis_y}" r="5" fill="{soft}"/>')
         for j, line in enumerate(lines):
             g.append(f'<text class="{"ln" if j == 0 else "ln2"}" x="{cx}"'
                      f' y="{100 + j * 15}" text-anchor="middle">{line}</text>')
         if last:
             g.append(f'<text class="mark" x="{cx}" y="{100 + len(lines) * 15 + 16}"'
-                     f' text-anchor="middle">?</text>')
+                     f' text-anchor="middle" fill="{soft}">?</text>')
         p.append(f'<g class="y{i}">' + "".join(g) + '</g>')
 
     # 해를 지나가는 점
-    p.append(f'<circle r="4" fill="{ACC}"><animateMotion dur="{DUR}s" fill="freeze"'
+    hop = ";".join(t[1] for t in TONES)
+    p.append(f'<circle r="4.5" fill="{TONES[0][1]}">'
+             f'<animate attributeName="fill" dur="{DUR}s" fill="freeze"'
+             f' values="{hop}" calcMode="discrete"/>'
+             f'<animateMotion dur="{DUR}s" fill="freeze"'
              f' calcMode="linear" path="M{cols[0]},{axis_y} H{cols[-1]}"'
              f' keyTimes="0;0.05;0.86;1" keyPoints="0;0;1;1"/>'
              f'<animate attributeName="opacity" dur="{DUR}s" fill="freeze"'
@@ -119,7 +146,8 @@ def build_timeline(ic):
 
     # ── 아래: 그때까지 쌓인 것 ────────────────────────────────────────────
     stack_y = 212
-    p.append(f'<path class="axis" d="M34,{stack_y - 30} H846" opacity=".55"/>')
+    p.append(f'<path d="M34,{stack_y - 30} H846" fill="none" stroke="url(#ax)"'
+             f' stroke-opacity=".45" stroke-width="1.4" stroke-linecap="round"/>')
 
     flat = []                      # (연도 순번, 항목)
     for i, (_, _, items) in enumerate(YEARS):
@@ -132,8 +160,14 @@ def build_timeline(ic):
     x = left
     for (i, it), wd in zip(flat, widths):
         mid = x + wd / 2
-        body = chip(mid, stack_y, it[1]) if isinstance(it, tuple) \
-            else logo(ic, it, mid, stack_y, 21)
+        ink, soft = TONES[i]
+        if isinstance(it, tuple):
+            body = (chip(mid, stack_y, it[1])
+                    .replace('class="chip"', f'class="chip" stroke="{soft}"')
+                    .replace('class="chip-t"', f'class="chip-t" fill="{ink}"'))
+        else:
+            body = logo(ic, it, mid, stack_y, 21).replace('class="lg"',
+                                                          f'class="lg" fill="{soft}"')
         p.append(f'<g class="y{i}">{body}</g>')
         x += wd + gap
 
@@ -145,15 +179,15 @@ def build_timeline(ic):
     css = f"""
   text {{ font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD Gothic Neo","Malgun Gothic",sans-serif; }}
   .axis {{ fill: none; stroke: {BASE}; stroke-opacity: .2; stroke-width: 1.2; }}
-  .yr {{ font-size: 14px; font-weight: 700; fill: {BASE}; fill-opacity: 1; }}
+  .yr {{ font-size: 14px; font-weight: 700; }}
   .ln {{ font-size: 11.5px; font-weight: 600; fill: {BASE}; fill-opacity: .92; }}
   .ln2 {{ font-size: 10px; font-weight: 400; fill: {BASE}; fill-opacity: .62; }}
-  .node-y {{ fill: {ACC}; fill-opacity: .9; }}
-  .node-q {{ fill: none; stroke: {BASE}; stroke-opacity: .5; stroke-width: 1.4; stroke-dasharray: 3 3; }}
-  .lg path {{ fill: {BASE}; fill-opacity: .82; }}
-  .chip {{ fill: none; stroke: {BASE}; stroke-opacity: .42; stroke-width: 1.1; }}
-  .chip-t {{ font-size: 10.5px; font-weight: 600; fill: {BASE}; fill-opacity: .88; }}
-  .mark {{ font-size: 26px; font-weight: 700; fill: {BASE}; fill-opacity: .45; }}
+  .node-q {{ fill: none; stroke: {BASE}; stroke-opacity: .45; stroke-width: 1.4; stroke-dasharray: 3 3; }}
+  .lg path {{ fill: inherit; }}
+  .lg {{ fill-opacity: .95; }}
+  .chip {{ fill: none; stroke-opacity: .8; stroke-width: 1.1; }}
+  .chip-t {{ font-size: 10.5px; font-weight: 600; }}
+  .mark {{ font-size: 26px; font-weight: 700; fill-opacity: .7; }}
   g[class^="y"] {{ animation-duration: {DUR}s; animation-iteration-count: 1;
     animation-fill-mode: both; animation-timing-function: cubic-bezier(.2,.8,.2,1); }}
 """
