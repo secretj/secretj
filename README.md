@@ -73,4 +73,15 @@
 <sub><a href="https://github.com/secretj/secretj-claude-config">저장소</a></sub>
 </td>
 </tr>
+<tr>
+<td width="50%" valign="top">
+<a href="https://secretj.github.io/study-notes-site/"><b>공부 기록</b></a><br>
+<sub>공부하며 정리한 글 모음. 주제·태그·연도로 분류</sub><br><br>
+<img src="https://img.shields.io/badge/JavaScript-f5e6a8?style=flat-square&logo=javascript&logoColor=7a6512" alt="JavaScript">
+<img src="https://img.shields.io/badge/GitHub%20Pages-d2d8de?style=flat-square&logo=github&logoColor=3d4650" alt="GitHub Pages">
+<img src="https://img.shields.io/badge/Markdown-d3dccc?style=flat-square&logo=markdown&logoColor=4a5840" alt="Markdown"><br>
+<sub><a href="https://secretj.github.io/study-notes-site/">secretj.github.io/study-notes-site</a> · <a href="https://github.com/secretj/study-notes">글 저장소</a></sub>
+</td>
+<td width="50%" valign="top"></td>
+</tr>
 </table>
