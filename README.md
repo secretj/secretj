@@ -82,6 +82,13 @@
 <img src="https://img.shields.io/badge/Markdown-d3dccc?style=flat-square&logo=markdown&logoColor=4a5840" alt="Markdown"><br>
 <sub><a href="https://secretj.github.io/study-notes-site/">secretj.github.io/study-notes-site</a> · <a href="https://github.com/secretj/study-notes">글 저장소</a></sub>
 </td>
-<td width="50%" valign="top"></td>
+<td width="50%" valign="top">
+<a href="https://chromewebstore.google.com/detail/gpnlkgjjgnjpdpbfbkkloffiiahbfkfa"><b>Tree Notes</b></a><br>
+<sub>크롬 옆에 띄워 두는 폴더 트리 메모 CHROME EXTENSION</sub><br><br>
+<img src="https://img.shields.io/badge/JavaScript-f5e6a8?style=flat-square&logo=javascript&logoColor=7a6512" alt="JavaScript">
+<img src="https://img.shields.io/badge/Chrome%20Extension-c6dbf7?style=flat-square&logo=googlechrome&logoColor=1f4f8a" alt="Chrome Extension">
+<img src="https://img.shields.io/badge/IndexedDB-e3d3f0?style=flat-square&logoColor=51308f" alt="IndexedDB"><br>
+<sub><a href="https://chromewebstore.google.com/detail/gpnlkgjjgnjpdpbfbkkloffiiahbfkfa">Chrome 웹 스토어</a></sub>
+</td>
 </tr>
 </table>
