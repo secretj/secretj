@@ -88,7 +88,7 @@
 <img src="https://img.shields.io/badge/JavaScript-f5e6a8?style=flat-square&logo=javascript&logoColor=7a6512" alt="JavaScript">
 <img src="https://img.shields.io/badge/Chrome%20Extension-c6dbf7?style=flat-square&logo=googlechrome&logoColor=1f4f8a" alt="Chrome Extension">
 <img src="https://img.shields.io/badge/IndexedDB-e3d3f0?style=flat-square&logoColor=51308f" alt="IndexedDB"><br>
-<sub><a href="https://chromewebstore.google.com/detail/gpnlkgjjgnjpdpbfbkkloffiiahbfkfa">Chrome 웹 스토어</a></sub>
+<sub><a href="https://chromewebstore.google.com/detail/gpnlkgjjgnjpdpbfbkkloffiiahbfkfa">Chrome 웹 스토어</a> · <a href="https://github.com/secretj/tree-notes">저장소</a></sub>
 </td>
 </tr>
 </table>
